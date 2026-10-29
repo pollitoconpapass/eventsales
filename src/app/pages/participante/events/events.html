@@ -1,0 +1,77 @@
+<div class="page">
+  <header class="head">
+    <div class="titular">
+      <h1>Todos los eventos</h1>
+      <p class="muted">128 eventos disponibles · Actualizado hoy</p>
+    </div>
+
+    <div class="tools" [formGroup]="busqueda">
+      <mat-form-field appearance="outline" class="search">
+        <mat-label>Buscar eventos</mat-label>
+        <input matInput formControlName="q" placeholder="Buscar eventos..." />
+        <mat-icon matPrefix>search</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="orden">
+        <mat-label>Ordenar</mat-label>
+        <mat-select formControlName="orden">
+          <mat-option value="recientes">Más recientes</mat-option>
+          <mat-option value="precio-asc">Menor precio</mat-option>
+          <mat-option value="precio-desc">Mayor precio</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </header>
+
+  <mat-chip-set class="filtros">
+    @for (filtro of filtros; track filtro.nombre) {
+      <mat-chip [style.background]="filtro.bg" [style.color]="filtro.color">
+        {{ filtro.nombre }}
+      </mat-chip>
+    }
+  </mat-chip-set>
+
+  <section class="grid">
+    @for (evento of eventos; track evento.id) {
+      <mat-card class="card">
+        <div class="card-image">
+          <mat-icon>image</mat-icon>
+          <span>Imagen del evento</span>
+        </div>
+        <mat-card-content>
+          <div class="card-top">
+            <mat-chip [style.background]="evento.catBg" [style.color]="evento.catColor">
+              {{ evento.categoria }}
+            </mat-chip>
+            <span class="precio">{{ evento.precio }}</span>
+          </div>
+
+          <h2 class="card-title">{{ evento.titulo }}</h2>
+
+          <p class="meta">
+            <mat-icon>calendar_today</mat-icon>
+            <span>{{ evento.fecha }}</span>
+          </p>
+          <p class="meta">
+            <mat-icon>location_on</mat-icon>
+            <span>{{ evento.lugar }}</span>
+          </p>
+
+          <mat-divider />
+
+          <a class="detalle" [routerLink]="['/participante/events', evento.id]">
+            <span>Ver detalle</span>
+            <mat-icon>arrow_forward</mat-icon>
+          </a>
+        </mat-card-content>
+      </mat-card>
+    }
+  </section>
+
+  <mat-paginator
+    [length]="128"
+    [pageSize]="9"
+    [pageSizeOptions]="[9, 18, 27]"
+    showFirstLastButtons
+  />
+</div>
