@@ -1,0 +1,88 @@
+<div class="login">
+  <section class="brand">
+    <span class="badge">VENTA DE ENTRADAS</span>
+    <h1>Encuentra, vive y comparte eventos.</h1>
+    <p class="lead">
+      Conciertos, deportes, restaurantes y ferias. Compra tu entrada en segundos y recibe
+      tu boleto al instante.
+    </p>
+    <ul class="benefits">
+      @for (beneficio of beneficios; track beneficio) {
+        <li>
+          <mat-icon>check_circle</mat-icon>
+          <span>{{ beneficio }}</span>
+        </li>
+      }
+    </ul>
+  </section>
+
+  <section class="panel">
+    <div class="card">
+      <h2 class="title">Iniciar sesión</h2>
+      <p class="subtitle">Bienvenido de nuevo. Ingresa tus datos para continuar.</p>
+
+      <div class="form" [formGroup]="form">
+        <mat-form-field appearance="outline">
+          <mat-label>Correo electrónico</mat-label>
+          <input matInput formControlName="email" placeholder="tu@correo.com" />
+          @if (form.controls.email.touched && form.controls.email.hasError('required')) {
+            <mat-error>El correo es obligatorio</mat-error>
+          }
+          @if (form.controls.email.touched && form.controls.email.hasError('email')) {
+            <mat-error>Ingresa un correo válido</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input
+            matInput
+            type="password"
+            formControlName="password"
+            placeholder="••••••••"
+          />
+          @if (form.controls.password.touched && form.controls.password.hasError('required')) {
+            <mat-error>La contraseña es obligatoria</mat-error>
+          }
+          @if (
+            form.controls.password.touched && form.controls.password.hasError('minlength')
+          ) {
+            <mat-error>Mínimo 6 caracteres</mat-error>
+          }
+        </mat-form-field>
+
+        <div class="options">
+          <mat-checkbox formControlName="remember">Recuérdame</mat-checkbox>
+          <span class="link">¿Olvidaste tu contraseña?</span>
+        </div>
+
+        <button
+          mat-flat-button
+          type="button"
+          class="submit"
+          routerLink="/participante/events"
+          [disabled]="form.invalid"
+        >
+          Iniciar sesión
+        </button>
+
+        <div class="divider">
+          <span class="line"></span>
+          <span class="text">o continúa con</span>
+          <span class="line"></span>
+        </div>
+
+        <button
+          mat-outlined-button
+          type="button"
+          class="guest"
+          routerLink="/participante/events"
+        >
+          Continuar como invitado
+        </button>
+      </div>
+
+      <p class="signup">¿No tienes cuenta? <span class="link">Regístrate</span></p>
+    </div>
+  </section>
+</div>
