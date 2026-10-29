@@ -1,0 +1,27 @@
+<mat-toolbar class="toolbar">
+  <a routerLink="/" class="logo">Event<span>Sales</span></a>
+  <span class="spacer"></span>
+  <nav class="nav">
+    <a
+      mat-button
+      routerLink="/organizador/events/new"
+      routerLinkActive="active"
+      class="nav-link"
+    >
+      Nuevo evento
+    </a>
+    <a mat-button routerLink="/participante/events" class="nav-link">Ver eventos</a>
+  </nav>
+</mat-toolbar>
+
+<main class="content">
+  <router-outlet />
+</main>
+
+<footer class="footer">
+  <span class="copy">EventSales © 2026 · Todos los derechos reservados</span>
+  <nav class="footer-links">
+    <a routerLink="/">Inicio</a>
+    <a routerLink="/participante/events">Eventos</a>
+  </nav>
+</footer>
