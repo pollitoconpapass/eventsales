@@ -46,3 +46,4 @@ Thumbs.db
 # Other custom files
 .DS_Store
 .env
+.vscode
