@@ -1,0 +1,132 @@
+<div class="page">
+  <a class="back" routerLink="/participante/events">
+    <mat-icon>arrow_back</mat-icon>
+    <span>Volver a todos los eventos</span>
+  </a>
+
+  <div class="main">
+    <section class="col-left">
+      <div class="imagen">
+        <mat-icon>image</mat-icon>
+        <span>Imagen del evento</span>
+      </div>
+
+      <div class="titular">
+        <div class="tags">
+          <mat-chip [style.background]="'rgba(225, 29, 72, 0.18)'" [style.color]="'#e11d48'">
+            Conciertos
+          </mat-chip>
+          <mat-chip [style.background]="'rgba(16, 185, 129, 0.18)'" [style.color]="'#10b981'">
+            Entradas disponibles
+          </mat-chip>
+        </div>
+
+        <h1>Noche Electro Pop</h1>
+
+        <div class="meta-row">
+          <span class="meta">
+            <mat-icon>calendar_today</mat-icon>
+            27 de noviembre de 2026 · 20:00
+          </span>
+          <span class="meta">
+            <mat-icon>location_on</mat-icon>
+            Estadio Nacional, Lima
+          </span>
+        </div>
+      </div>
+
+      <mat-divider />
+
+      <section class="bloque">
+        <h2>Descripción</h2>
+        <p class="descripcion">
+          La noche más esperada del año llega al Estadio Nacional. Noche Electro Pop reúne a
+          los mejores artistas de la escena electrónica local e internacional en un show de
+          tres horas con producción de primer nivel, pantallas LED y las pistas más bailadas
+          de la temporada. Vive una experiencia inolvidable bajo las estrellas junto a tus
+          amigos.
+        </p>
+      </section>
+
+      <section class="bloque">
+        <h2>Detalles del evento</h2>
+        <div class="detalles">
+          @for (dato of detalles; track dato.etiqueta) {
+            <div class="dato">
+              <span class="dato-label">
+                <mat-icon>{{ dato.icono }}</mat-icon>
+                {{ dato.etiqueta }}
+              </span>
+              <span class="dato-valor">{{ dato.valor }}</span>
+            </div>
+          }
+        </div>
+      </section>
+    </section>
+
+    <aside class="col-right">
+      <div class="card-compra">
+        <div class="precio-row">
+          <div class="precio-info">
+            <span class="label">Precio por entrada</span>
+            <span class="precio">$45</span>
+          </div>
+          <mat-chip [style.background]="'rgba(124, 58, 237, 0.18)'" [style.color]="'#7c3aed'">
+            Desde
+          </mat-chip>
+        </div>
+
+        <mat-divider />
+
+        <div class="cantidad" [formGroup]="form">
+          <mat-form-field appearance="outline">
+            <mat-label>Cantidad de entradas</mat-label>
+            <input matInput type="number" formControlName="cantidad" min="1" max="10" />
+            @if (form.controls.cantidad.touched && form.controls.cantidad.hasError('required')) {
+              <mat-error>Selecciona una cantidad</mat-error>
+            }
+            @if (
+              form.controls.cantidad.touched &&
+              (form.controls.cantidad.hasError('min') || form.controls.cantidad.hasError('max'))
+            ) {
+              <mat-error>La cantidad debe estar entre 1 y 10</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <mat-divider />
+
+        <div class="total">
+          <span class="label">Total</span>
+          <span class="total-valor">$45</span>
+        </div>
+
+        <button
+          mat-flat-button
+          type="button"
+          class="cta"
+          routerLink="/participante/checkout"
+          [disabled]="form.invalid"
+        >
+          Comprar entrada
+        </button>
+
+        <p class="nota">
+          <mat-icon>verified_user</mat-icon>
+          <span>Compra segura · Boleto al correo</span>
+        </p>
+      </div>
+
+      <div class="card-org">
+        <span class="org-label">Organizado por</span>
+        <div class="org-row">
+          <span class="avatar">EP</span>
+          <div class="org-info">
+            <span class="org-nombre">EventSales Producciones</span>
+            <span class="org-meta">128 eventos organizados</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
